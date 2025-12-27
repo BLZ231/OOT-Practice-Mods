@@ -16,6 +16,7 @@ extracted/
 build/
 expected/
 docs/doxygen/
+baseroms/
 *.z64
 *.n64
 *.v64
