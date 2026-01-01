@@ -3106,8 +3106,27 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
                 }
                 break;
             case MSGMODE_TEXT_DISPLAYING:
-            case MSGMODE_TEXT_DELAYED_BREAK:
+            case MSGMODE_TEXT_DELAYED_BREAK: {
+                //[BLZ231]Change intended to fix text box slowness
+                bool playerControlled =
+                msgCtx->textboxEndType != TEXTBOX_ENDTYPE_EVENT &&
+                msgCtx->textboxEndType != TEXTBOX_ENDTYPE_PERSISTENT &&
+                msgCtx->textboxEndType != TEXTBOX_ENDTYPE_FADING;
                 DRAW_TEXT(play, &gfx, sTextIsCredits);
+                //Reset A-press lock once A is released
+                if (!CHECK_BTN_ALL(input->cur.button, BTN_A)) {
+                    msgCtx->aPressLock = false;
+                }
+                if (!msgCtx->aPressLock &&
+                    playerControlled &&
+                    CHECK_BTN_ALL(input->press.button, BTN_A) &&
+                    msgCtx->textDrawPos < msgCtx->msgLength) {
+                    msgCtx->textDrawPos = msgCtx->msgLength;
+                    msgCtx->msgMode = MSGMODE_TEXT_AWAIT_INPUT;
+                    msgCtx->aPressLock = true;
+                }
+            }
+                //End of changes for above part
                 break;
             case MSGMODE_TEXT_AWAIT_INPUT:
             case MSGMODE_TEXT_AWAIT_NEXT:
@@ -3918,7 +3937,6 @@ void Message_DrawMain(PlayState* play, Gfx** p) {
                 msgCtx->msgMode = MSGMODE_TEXT_DISPLAYING;
                 break;
         }
-
         if (msgCtx->msgMode >= MSGMODE_OCARINA_PLAYING && msgCtx->msgMode < MSGMODE_TEXT_AWAIT_NEXT &&
             msgCtx->ocarinaAction != OCARINA_ACTION_FREE_PLAY && msgCtx->ocarinaAction != OCARINA_ACTION_CHECK_NOWARP) {
             Gfx_SetupDL_39Ptr(&gfx);
