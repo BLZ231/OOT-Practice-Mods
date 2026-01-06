@@ -3186,8 +3186,9 @@ void Interface_Draw(PlayState* play) {
     static s16 D_80125B1C[][3] = {
         { 0, 150, 0 }, { 100, 255, 0 }, { 255, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 },
     };
-    static s16 rupeeDigitsFirst[] = { 1, 0, 0 };
-    static s16 rupeeDigitsCount[] = { 2, 3, 3 };
+    //[BLZ231] Change to Rupee interface to reflect how the wallet works now
+    static s16 rupeeDigitsFirst[] = { 0, 1, 0 };
+    static s16 rupeeDigitsCount[] = { 3, 3, 4 };
     static s16 spoilingItemEntrances[] = { ENTR_LOST_WOODS_2, ENTR_ZORAS_DOMAIN_3, ENTR_ZORAS_DOMAIN_3 };
     static f32 D_80125B54[] = { -40.0f, -35.0f }; // unused
     static s16 D_80125B5C[] = { 91, 91 };         // unused
@@ -3296,6 +3297,7 @@ void Interface_Draw(PlayState* play) {
         gDPSetCombineLERP(OVERLAY_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
                           PRIMITIVE, 0);
 
+        //[BLZ231] Here were changes to rupee counter that I later reversed when they didn't work
         interfaceCtx->counterDigits[0] = interfaceCtx->counterDigits[1] = 0;
         interfaceCtx->counterDigits[2] = gSaveContext.save.info.playerData.rupees;
 
