@@ -70,14 +70,14 @@ u8 gUpgradeShifts[UPG_MAX] = {
 };
 
 u16 gUpgradeCapacities[UPG_MAX][4] = {
-    { 0, 30, 40, 50 },     // UPG_QUIVER
-    { 0, 20, 30, 40 },     // UPG_BOMB_BAG
-    { 0, 0, 0, 0 },        // UPG_STRENGTH (unused)
-    { 0, 0, 0, 0 },        // UPG_SCALE (unused)
-    { 99, 200, 500, 500 }, // UPG_WALLET
-    { 0, 30, 40, 50 },     // UPG_BULLET_BAG
-    { 0, 10, 20, 30 },     // UPG_DEKU_STICKS
-    { 0, 20, 30, 40 },     // UPG_DEKU_NUTS
+    { 0, 30, 40, 50 },          // UPG_QUIVER
+    { 0, 20, 30, 40 },          // UPG_BOMB_BAG
+    { 0, 0, 0, 0 },             // UPG_STRENGTH (unused)
+    { 0, 0, 0, 0 },             // UPG_SCALE (unused)
+    { 200, 500, 1000, 1000 },   // UPG_WALLET [BLZ231] Changed to be more sensible
+    { 0, 30, 40, 50 },          // UPG_BULLET_BAG
+    { 0, 10, 20, 30 },          // UPG_DEKU_STICKS
+    { 0, 20, 30, 40 },          // UPG_DEKU_NUTS
 };
 
 u32 gGsFlagsMasks[] = { 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 };

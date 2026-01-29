@@ -301,14 +301,19 @@ NORETURN void DmaMgr_Error(DmaRequest* req, const char* filename, const char* er
     PRINTF_RST();
 
     if (req->filename != NULL) {
-        sprintf(buff1, "DMA ERROR: %s %d", req->filename, req->line);
+        sprintf(buff1, "DMA ERROR: %s %d", req->filename, (int)req->line);
     } else if (sDmaMgrCurFileName != NULL) {
-        sprintf(buff1, "DMA ERROR: %s %d", sDmaMgrCurFileName, sDmaMgrCurFileLine);
+        sprintf(buff1, "DMA ERROR: %s %d", sDmaMgrCurFileName, (int)sDmaMgrCurFileLine);
     } else {
         sprintf(buff1, "DMA ERROR: %s", errorName != NULL ? errorName : "???");
     }
 
-    sprintf(buff2, "%07X %08X %X %s", vrom, ram, size, filename != NULL ? filename : "???");
+    sprintf(buff2, "%07X %08X %X %s", 
+            (unsigned int)vrom, 
+            (unsigned int)ram, 
+            (unsigned int)size, 
+            filename != NULL ? filename : "???");
+            
     Fault_AddHungupAndCrashImpl(buff1, buff2);
 }
 
@@ -631,6 +636,7 @@ s32 DmaMgr_RequestSync(void* ram, uintptr_t vrom, size_t size) {
 }
 
 void DmaMgr_Init(void) {
+    PRINTF(">>> DmaMgr_Init entered <<<\n");
     const char** name;
     s32 idx;
     DmaEntry* iter;

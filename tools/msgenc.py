@@ -148,7 +148,7 @@ def main():
     if args.input == "-":
         text = sys.stdin.read()
     else:
-        with open(args.input, "r") as infile:
+        with open(args.input, "rb") as infile:
             text = infile.read()
 
     text = remove_comments(text)

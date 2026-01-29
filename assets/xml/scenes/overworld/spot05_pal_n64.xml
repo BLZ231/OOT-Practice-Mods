@@ -1,5 +1,5 @@
 <Root>
-    <File Name="spot05_scene" Segment="2">
+    <File Name="spot05_scene" Segment="2"> <!--[BLZ231] Marked for future reference -->
         <Cutscene Name="gMeadowMinuetCs" Offset="0x3F84"/>
         <Cutscene Name="gMeadowSariasSongCs" Offset="0x5740"/>
 

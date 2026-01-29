@@ -173,7 +173,7 @@ void EnOwl_Init(Actor* thisx, PlayState* play) {
         case OWL_OUTSIDE_KOKIRI:
             this->actionFunc = EnOwl_WaitOutsideKokiri;
             break;
-        case OWL_HYRULE_CASTLE:
+        case OWL_HYRULE_CASTLE: //[BLZ231] Marked for future reference, probably kill
             this->actionFlags |= 2;
             this->unk_3EE = 0x20;
             this->actionFunc = EnOwl_WaitHyruleCastle;
